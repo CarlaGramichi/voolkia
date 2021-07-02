@@ -1907,8 +1907,21 @@ app.get('/', (req, res) => {
     const sellerId = req.query.seller_id;
 
     const filteredResults = searchBySiteAndSellerId(siteId, sellerId);
-
+    
     res.send(filteredResults);
+    const variable = filteredResults.map(function(obj){
+        var rObj = {};
+   rObj[obj.clave] = obj.valor;
+   return JSON.stringify(rObj);
+    })
+
+    const texto = JSON.stringify(filteredResults);
+
+
+    fs.appendFile('archivo.log', variable, (err) => {
+        if (err) throw err;
+        console.log('Archivo Creado Satisfactoriamente');
+      });
 
   
     
