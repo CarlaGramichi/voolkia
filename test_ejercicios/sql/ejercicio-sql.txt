@@ -1,0 +1,4 @@
+
+/** En los archivos sql adjuntados en esta carpeta se encuentan las respuestas 
+correspondientes al ejercicio SQL + Propuestas.
+**/

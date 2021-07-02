@@ -1,0 +1,16 @@
+//**Lectura y comprensión Script básico grails**//
+
+import me.*;
+def upsPullTrkService = ctx.getBean('upsPullTrkService')
+def s = Shipment.get(27528954729)
+def tn = s.trackingNumber
+def trackingData = upsPullTrkService.getTrkEvents([tn])
+trackingData.each { td ->
+println "------------------------------------------------"
+println "${td.sucursal} - ${td.eventDate} - ${td.description}"
+}
+"Done"
+
+1.  A tu entender, que se busca obtener como output del script?
+Busca obtener como output los datos de seguimiento de un envio realizado
+la sucursal, fecha,  y una descripción.

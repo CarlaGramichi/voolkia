@@ -1,0 +1,19 @@
+//** Script básico bash **//
+
+#!/bin/bash
+users_id=(71665538 66146765 132961968 15096445 172753273 54152646) //** Define los valores de users_id
+for users_id in ${users_id[*]} //** Bucle que recorrerá todos ${users_id[*]} comparando con los  users_id definidos en la linea 1
+do //** Palabra clave que inicia el bucle
+curl=$(curl -s "api.mercadolibre.com/users/$users_id/shipping_preferences" | jq -c
+'.services')  //** Se define curl, desde la api de mercadolibre trae los datos solicitados
+              //** (envios de preferencia de los usuarios pasados en $users_id y filtrando por services)
+echo "$users_id: $curl" //** Imprime los datos-> users_id: y lista en una linea sus servicios de envio.
+done //**Fin del bucle
+
+
+1. A tu entender, que se busca obtener como output del script?
+Busca obtener como output la preferencia de envio que tiene cada usuario, es decir,
+lo que tendra como salida es el users_id y los servicios de envios usados (o de preferencia).
+
+3. Cuántas líneas se imprimen como output?
+Imprime 6 lineas, la cantidad de usuarios con sus correspondientes servicios de envios.
