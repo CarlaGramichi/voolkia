@@ -208,6 +208,7 @@ const response = {
             },
             "original_price": null,
             "category_id": "MLA1055",
+            "category_name": "Prueba 10",
             "official_store_id": null,
             "catalog_product_id": "MLA13550363",
             "tags": [
@@ -394,6 +395,7 @@ const response = {
             ],
             "original_price": null,
             "category_id": "MLA1055",
+            "category_name": "Prueba 9",
             "official_store_id": null,
             "catalog_product_id": "MLA12866684",
             "tags": [
@@ -579,6 +581,7 @@ const response = {
             ],
             "original_price": null,
             "category_id": "MLA1055",
+            "category_name": "Prueba 8",
             "official_store_id": null,
             "catalog_product_id": "MLA12866684",
             "tags": [
@@ -764,6 +767,7 @@ const response = {
             ],
             "original_price": null,
             "category_id": "MLA1055",
+            "category_name": "Prueba 7",
             "official_store_id": null,
             "catalog_product_id": "MLA12866684",
             "tags": [
@@ -949,6 +953,7 @@ const response = {
             ],
             "original_price": null,
             "category_id": "MLA1055",
+            "category_name": "Prueba 6",
             "official_store_id": null,
             "catalog_product_id": "MLA12866684",
             "tags": [
@@ -1134,6 +1139,7 @@ const response = {
             ],
             "original_price": null,
             "category_id": "MLA1055",
+            "category_name": "Prueba 5",
             "official_store_id": null,
             "catalog_product_id": "MLA12866684",
             "tags": [
@@ -1319,6 +1325,7 @@ const response = {
             ],
             "original_price": null,
             "category_id": "MLA1055",
+            "category_name": "Prueba 4",
             "official_store_id": null,
             "catalog_product_id": "MLA12866684",
             "tags": [
@@ -1504,6 +1511,7 @@ const response = {
             ],
             "original_price": null,
             "category_id": "MLA1055",
+            "category_name": "Prueba 3",
             "official_store_id": null,
             "catalog_product_id": "MLA12866684",
             "tags": [
@@ -1689,6 +1697,7 @@ const response = {
             ],
             "original_price": null,
             "category_id": "MLA1055",
+            "category_name": "Prueba 2",
             "official_store_id": null,
             "catalog_product_id": "MLA12866684",
             "tags": [
@@ -1874,6 +1883,7 @@ const response = {
             ],
             "original_price": null,
             "category_id": "MLA1055",
+            "category_name": "Prueba 1",
             "official_store_id": null,
             "catalog_product_id": "MLA12866684",
             "tags": [
@@ -1907,24 +1917,16 @@ app.get('/', (req, res) => {
     const sellerId = req.query.seller_id;
 
     const filteredResults = searchBySiteAndSellerId(siteId, sellerId);
-    
-    res.send(filteredResults);
-    const variable = filteredResults.map(function(obj){
-        var rObj = {};
-   rObj[obj.clave] = obj.valor;
-   return JSON.stringify(rObj);
+
+    let fileContents = [];
+    filteredResults.map((result) => {
+        fileContents.push(`${result.id}, ${result.title}, ${result.category_id},${result.category_name}`);
     })
-
-    const texto = JSON.stringify(filteredResults);
-
-
-    fs.appendFile('archivo.log', variable, (err) => {
+    fs.appendFile('datos_item.log', fileContents.join("\n"), (err) => {
         if (err) throw err;
         console.log('Archivo Creado Satisfactoriamente');
       });
-
-  
-    
+    res.send(filteredResults);
 })
 
 app.listen(port, () => console.log(`V server listening on port ${port}!`))
